@@ -5,11 +5,9 @@ let todoControl = document.querySelector('.todo-control'),
     todoList = document.querySelector('.todo-list'),
     todoCompleted = document.querySelector('.todo-completed');
     const todoData = [];
-    let b = [];
     const render = function(){
     todoList.textContent = '';
     todoCompleted.textContent = '';
-    todoList.innerHTML = localStorage.getItem('storage');
 
     todoData.forEach(function(item){
         
@@ -38,29 +36,25 @@ let todoControl = document.querySelector('.todo-control'),
             todoData.splice(item, 1);
         
         });
-        b.push(li.innerHTML);
        
-        localStorage.setItem('storage', (b));
     });
 
 };
+
 todoControl.addEventListener('submit', function(event){
     event.preventDefault();
-    let newTodo = {
-        value: headerInput.value,
-        completed: false  
-    };
-
     if(headerInput.value === ''){
-        todoControl.preventDefault();
+        return false;
     }
+        let newTodo = {
+            value: headerInput.value,
+            completed: false  
+    };
+        headerInput.value = '';
         todoData.push(newTodo);
-        console.log(newTodo);
-
-
         render();
-        
-    
+
+
 });
 
 render();
